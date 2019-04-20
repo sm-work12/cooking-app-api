@@ -14,3 +14,19 @@ services:
     
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+
+    environment:
+      - DB_HOST=db
+      - DB_NAME=cookingapp
+      - DB_USER=postgres
+      - DB_PASS=supersecret
+    depends_on:
+      - db
+
+  db:
+    container_name: "cooking-app-api-db"
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=cookingapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecret
